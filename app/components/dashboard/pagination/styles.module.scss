@@ -1,0 +1,16 @@
+.page {
+    &_container{
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+    &_button{
+        padding: 5px 10px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+    }
+    &_button:disabled {
+        cursor: not-allowed;
+    }
+}
