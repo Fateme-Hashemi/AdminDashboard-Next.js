@@ -1,7 +1,8 @@
-import styles from "../../../components/dashboard/users/singleUser/styles.module.scss";
-import Image from "next/image";
 import { fetchSingleUser } from "../../../lib/data";
 import { updateUser } from "../../../lib/actions";
+import styles from "../../../components/dashboard/users/singleUser/styles.module.scss";
+import Image from "next/image";
+
 
 const SingleUserPage = async ({params}) => {
   const {id} = params;
@@ -10,7 +11,7 @@ const SingleUserPage = async ({params}) => {
     <div className={styles.user_container}>
       <div className={styles.user_infoContainer}>
         <div className={styles.user_imgContainer}>
-          <Image src={ "/noavatar.png"} alt="" fill />
+          <Image src={user.img || "/noavatar.png"} alt="" fill />
         </div>
       {user.username}
       </div>
@@ -29,13 +30,13 @@ const SingleUserPage = async ({params}) => {
           <textarea  name="address" placeholder={user.address} />
           <label>Is Admin?</label>
           <select name="isAdmin" id="isAdmin">
-            <option >Yes</option>
-            <option >No</option>
+          <option value={true} selected={user.isAdmin}>Yes</option>
+            <option value={false} selected={!user.isAdmin}>No</option>
           </select>
           <label>Is Active?</label>
           <select name="isActive" id="isActive">
-            <option>Yes</option>
-            <option>No</option>
+          <option value={true} selected={user.isActive}>Yes</option>
+            <option value={false} selected={!user.isActive}>No</option>
           </select>
           <button>Update</button>
         </form>

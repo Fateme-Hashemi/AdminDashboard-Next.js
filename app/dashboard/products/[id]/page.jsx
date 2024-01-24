@@ -1,39 +1,40 @@
 import styles from "../../../components/dashboard/products/singleProduct/styles.module.scss";
 import Image from "next/image";
 import { fetchSingleProduct } from "../../../lib/data";
+import {updateProduct} from '../../../lib/actions'
 
 const SingleProductPage = async ({params}) => {
 const {id} = params;
-const product = fetchSingleProduct(id)
+const product = await fetchSingleProduct(id);
 
   return (
     <div className={styles.container}>
     <div className={styles.infoContainer}>
       <div className={styles.imgContainer}>
-        <Image src="/noavatar.png" alt="" fill />
+        <Image src={product.img || "/noavatar.png"} alt="" fill />
       </div>
-     Tile
+     {product.title}
     </div>
     <div className={styles.formContainer}>
-      <form className={styles.form}>
-        <input type="hidden" name="id" />
+      <form className={styles.form} action={updateProduct}>
+        <input type="hidden" name="id" value={product.id} />
         <label>Title</label>
-        <input type="text" name="title" placeholder={""} />
+        <input type="text" name="title" placeholder={product.title} />
         <label>Price</label>
-        <input type="number" name="price" placeholder={""} />
+        <input type="number" name="price" placeholder={product.price} />
         <label>Stock</label>
-        <input type="number" name="stock" placeholder={""} />
+        <input type="number" name="stock" placeholder={product.stock} />
         <label>Color</label>
         <input
           type="text"
           name="color"
-          placeholder={"color"}
+          placeholder={product.color}
         />
         <label>Size</label>
         <textarea
           type="text"
           name="size"
-          placeholder={"size"}
+          placeholder={product.size}
         />
         <label>Cat</label>
         <select name="cat" id="cat">
@@ -45,7 +46,7 @@ const product = fetchSingleProduct(id)
           name="desc"
           id="desc"
           rows="10"
-          placeholder={""}
+          placeholder={product.desc}
         ></textarea>
         <button>Update</button>
       </form>

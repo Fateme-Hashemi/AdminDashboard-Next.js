@@ -15,14 +15,13 @@ export const fetchUsers = async (q, page) => {
     }
   };
   export const fetchSingleUser = async (id) => {
-      try {
-        await connectToDB(); 
-      
-        const singleUser = await User.findById(id)
-        return singleUser ;
-      } catch (err) {
-        console.log(err);
-      }
+    try {
+      connectToDB();
+      const user = await User.findById(id);
+      return user;
+    } catch (err) {
+      console.log(err);
+    }
     };
 
 
