@@ -1,4 +1,5 @@
 import MenuLink from './menuLink/menuLink'
+import {auth, signOut} from '../../../auth'
 import Image from 'next/image';
 import styles from './sidebar.module.scss';
 import {
@@ -78,7 +79,9 @@ const menuItems = [
   ];
   
 
-const Sidebar = () => {
+const Sidebar = async () => {
+  const session = await auth();
+  console.log('session',session);
     return (
         <div className={styles.sidebar_container}>
             <div className={styles.sidebar_user}>
@@ -98,10 +101,16 @@ const Sidebar = () => {
               </li>  
                 ))}
           </ul>
+          <form action={async () => {
+            'use server'
+            await signOut();
+          }}>
           <button className={styles.sidebar_btn}>
             <MdLogout />
             Logout
             </button>
+          </form>
+    
         </div>
     )
 }
