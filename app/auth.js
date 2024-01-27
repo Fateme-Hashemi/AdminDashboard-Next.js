@@ -43,7 +43,10 @@ export const { signIn, signOut, auth } = NextAuth({
       async authorize(credentials) {
         try {
           const user = await login(credentials);
-          return user;
+          if (user) {
+            signIn(); 
+            return user;
+          }
         } catch (err) {
           return null;
         }
