@@ -1,4 +1,4 @@
-import MenuLink from './menuLink/menuLink'
+import MenuLink from './menuLink/MenuLink'
 import {auth, signOut} from '../../../auth'
 import Image from 'next/image';
 import styles from './sidebar.module.scss';
